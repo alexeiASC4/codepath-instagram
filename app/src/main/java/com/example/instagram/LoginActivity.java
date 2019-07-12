@@ -15,7 +15,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameInput;
     private EditText mPasswordInput;
     private Button mLoginButton;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 login (username, password);
             }
         });
+
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     public void done(ParseException e) {
                         if (e==null){
                             Log.d("SignUpActivity", "Sign Up Success");
-                            final Intent intent = new Intent (MainActivity.this, HomeActivity.class);
+                            final Intent intent = new Intent (LoginActivity.this, ComposeActivity.class);
                             startActivity(intent);
                             finish();
                         }else{
@@ -66,14 +67,22 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            final Intent intent = new Intent (LoginActivity.this, ComposeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
     private void login(String username, String password){
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e == null){
                     Log.d("LoginActivity", "Login successful");
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent = new Intent(LoginActivity.this, ComposeActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -83,4 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

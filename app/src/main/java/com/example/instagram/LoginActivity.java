@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,16 +21,18 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordInput;
     private Button mLoginButton;
     private Button mSignUpButton;
+    public ImageView mLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         mUsernameInput = findViewById(R.id.etUsername);
         mPasswordInput = findViewById(R.id.etPassword);
         mLoginButton = findViewById(R.id.btnLogin);
         mSignUpButton = findViewById(R.id.btnSignUp);
+        mLogo = findViewById(R.id.ivLogo);
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

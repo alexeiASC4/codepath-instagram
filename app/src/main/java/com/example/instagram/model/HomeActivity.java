@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView= findViewById(R.id.bottom_navigation);
 
+
         //create the adapter
         mAdapter = new PostAdapter(this, posts);
         //create the data source

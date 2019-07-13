@@ -1,6 +1,8 @@
 package com.example.instagram;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.instagram.model.Post;
 import com.parse.ParseFile;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -41,6 +44,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //populate the view
         holder.mUsername.setText(post.getUser().getUsername());
         holder.mCaption.setText(post.getDescription());
+
+        holder.mDate.setText(getRelativeTimeAgo(post.getCreatedAt()));
 
         ParseFile image = post.getImage();
         if (image!=null){
@@ -72,6 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ImageView mImage;
         public TextView mUsername;
         public TextView mCaption;
+        public TextView mDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,12 +85,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mUsername = itemView.findViewById(R.id.tvUsername);
             mCaption = itemView.findViewById(R.id.tvCaption);
             mImage = itemView.findViewById(R.id.ivPicture);
+            mDate = itemView.findViewById(R.id.tvDate);
 
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-
+            int position = getAdapterPosition();
+            Intent i = new Intent(context, DetailActivity.class);
+            i.putExtra("post", mPosts.get(position));
+            context.startActivity(i);
         }
     }
+
+    public static String getRelativeTimeAgo(Date date) {
+        String relativeDate = "";
+        long dateMillis = date.getTime();
+        relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
+        return relativeDate;
+    }
+
 }

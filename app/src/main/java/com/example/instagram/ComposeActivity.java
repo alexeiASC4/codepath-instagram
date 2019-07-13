@@ -23,14 +23,12 @@ import androidx.core.content.FileProvider;
 import com.example.instagram.model.HomeActivity;
 import com.example.instagram.model.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 public class ComposeActivity extends AppCompatActivity {
 
@@ -38,7 +36,6 @@ public class ComposeActivity extends AppCompatActivity {
 
     private EditText mDescriptionInput;
     private Button mCreateButton;
-    private Button mRefreshButton;
     private Button mLogoutButton;
     private Button mCameraButton;
     private ImageView mPreviewImage;
@@ -64,7 +61,6 @@ public class ComposeActivity extends AppCompatActivity {
 
         mDescriptionInput = findViewById(R.id.etDescription);
         mCreateButton = findViewById(R.id.btnCreate);
-        mRefreshButton = findViewById(R.id.btnRefresh);
         mLogoutButton = findViewById(R.id.btnLogout);
         mCameraButton = findViewById(R.id.btnCamera);
         mPreviewImage = findViewById(R.id.ivPreview);
@@ -83,13 +79,6 @@ public class ComposeActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(ComposeActivity.this, "No photo to submit", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        mRefreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadTopPosts();
             }
         });
 
@@ -159,9 +148,9 @@ public class ComposeActivity extends AppCompatActivity {
 
                 File photoFile = getPhotoFileUri(photoFileName);
 
-                ParseFile parseFile = new ParseFile(photoFile);
+                //ParseFile parseFile = new ParseFile(photoFile);
             } else { // Result was a failure
-                //Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -195,27 +184,6 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void loadTopPosts() {
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); ++i) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername()
-                        );
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     public void onLaunchCamera(View view) {

@@ -6,7 +6,7 @@ Time spent: **25** hours spent in total
 
 ## User Stories
 
-The following **required** functionality is completed:
+The following functionality is completed:
 
 - [x] User sees app icon in home screen.
 - [x] User can sign up to create a new account using Parse authentication
@@ -20,24 +20,9 @@ The following **required** functionality is completed:
 The following **stretch** features are implemented:
 
 - [x] Style the login page to look like the real Instagram login page.
-- [ ] Style the feed to look like the real Instagram feed.
 - [x] User should switch between different tabs - viewing all posts (feed view), capture (camera and photo gallery view) and profile tabs (posts made) using a Bottom Navigation View.
-- [ ] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
 - [x] Show the username and creation time for each post
-- [ ] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse
-- User Profiles:
-  - [ ] Allow the logged in user to add a profile photo
-  - [ ] Display the profile photo with each post
-  - [ ] Tapping on a post's username or profile photo goes to that user's profile page
-- [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
-- [ ] Create a custom Camera View on your phone.
 - [x] Run your app on your phone and use the camera to take the photo
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1. The Styling
-2. Liking posts and commenting
 
 ## Video Walkthrough
 
